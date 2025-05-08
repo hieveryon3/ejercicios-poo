@@ -20,10 +20,17 @@ public class Ejercicio7POO {
             ArrayList <Persona> personas = new ArrayList<>();
             Scanner teclado = new Scanner(System.in);
             
+            int cantPersonas = 0;
+            int cantVarones = 0;
+            int cantMujeres = 0;
+            double rangoEdades = 0;
+            int mayorEdad = 0;
+            
+            
             while(true){
                 System.out.println("Ingrese el DNI (0 para terminar): ");
                 String dni = teclado.nextLine();
-                if (dni.equals("0")){
+                if(dni.equals("0")){
                     break;
                 }
                 System.out.println("");
@@ -33,9 +40,44 @@ public class Ejercicio7POO {
                 System.out.println("");
                 System.out.println("Ingrese el sexo (F/M): ");
                 String sexo = teclado.nextLine();
+                if(sexo.equals("M")){
+                    cantVarones++;
+                    if(edad >= 16 && edad <= 65){
+                        rangoEdades++;
+                    }
+                } else {
+                    cantMujeres++;
+}
+                System.out.println("");
                 
                 Persona persona = new Persona (dni, edad, sexo);
                 personas.add(persona);
+                
+                cantPersonas += 1;
+                
+                if(edad > mayorEdad){
+                    mayorEdad = edad; 
+                }
+            }
+            
+            double porcentajeVarones = (rangoEdades / cantVarones) * 100;
+            
+            System.out.println("---------------INFORME---------------");
+            System.out.println("");
+            
+            System.out.println("Las personas censadas fueron: " + cantPersonas);
+            System.out.println("La cantidad de varones fueron: " + cantVarones);
+            System.out.println("La cantidad de mujeres fueron: " + cantMujeres);
+            System.out.println("El porcentaje de varones cuya edad varía entre 16 y 65 años respecto del total de varones es: " + porcentajeVarones + "%");
+            System.out.println("");
+            
+            for (Persona persona : personas){
+                if(persona.getEdad() == mayorEdad){
+                    System.out.println("El DNI de la persona con mayor edad es: " + persona.getDni());
+                    System.out.println("La edad de la persona con mayor edad es: " + persona.getEdad());
+                    System.out.println("El sexo de la persona con mayor edad es: " + persona.getSexo());
+                    break;
+                }
             }
     }
     
